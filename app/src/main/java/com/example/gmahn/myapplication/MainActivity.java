@@ -12,12 +12,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.skt.Tmap.TMapView;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean isFilming;
+    private boolean isRecording;
 
     private SensorManager sensorManager;
     private Sensor sensorAccel;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String APP_KEY = "6e516359-0404-4863-9008-6594a7d4c769";
 
-    private FrameLayout frmTMapView;
+    private LinearLayout linTMapView;
     private CameraPreviewView cpvBlackBox;
 
     private ImageButton ibVideoCapture;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        frmTMapView = findViewById(R.id.frmTMapView);
+        linTMapView = findViewById(R.id.linTMapView);
         cpvBlackBox = findViewById(R.id.cpvBlackBox);
         ibVideoCapture = findViewById(R.id.ibVideoCapture);
     }
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
 
-        frmTMapView.addView(tMapView);
+        linTMapView.addView(tMapView);
     }
 
     private LocationListener locationListener = new LocationListener() {
@@ -142,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 using = true;
                 notiAlert = new NotiAlert(getApplicationContext()) ;
                 notiAlert.createNotificationChannel("NOTIFICATION_CHANNEL_ID", "충격감지", "캡쳐완료");
+                cpvBlackBox.captureCamera(MainActivity.this);
                 using =false;
                 isUp=false;
                 isDown=false;
@@ -155,14 +157,16 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private View.OnClickListener ibVideoCaptureClickListener = v -> {
-        if (isFilming) {
+        cpvBlackBox.recordVideo(isRecording, MainActivity.this);
+        if (isRecording) {
             Toast.makeText(this, "촬영을 종료합니다.", Toast.LENGTH_SHORT).show();
             ibVideoCapture.setImageResource(R.drawable.switch_default_2);
+            isRecording = false;
         }
         else {
             Toast.makeText(this, "촬영을 시작합니다.", Toast.LENGTH_SHORT).show();
             ibVideoCapture.setImageResource(R.drawable.switch_capture_2);
+            isRecording = true;
         }
     };
-
 }
