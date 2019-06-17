@@ -56,15 +56,9 @@ public class CameraPreviewView extends SurfaceView {
         }
     };
 
-    private void capture(Camera.PictureCallback handler) {
-        if (camera != null) {
-            camera.takePicture(null, null, handler);
-        }
-    }
-
     public void captureCamera(Activity activity) {
         if (camera != null) {
-            capture((data, camera) -> {
+            camera.takePicture(null, null, (data, camera) -> {
                 try {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                     String outUriStr = MediaStore.Images.Media.insertImage
@@ -108,7 +102,7 @@ public class CameraPreviewView extends SurfaceView {
                         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                         mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
 
-//                        mediaRecorder.setOrientationHint(90);
+                        mediaRecorder.setOrientationHint(90);
                         mediaRecorder.setOutputFile(Environment.getExternalStorageDirectory().getPath() + "/" +  Environment.DIRECTORY_MOVIES + "/test2.mp4");
                         Log.d("경로", Environment.getExternalStorageDirectory().getPath() + "/" +  Environment.DIRECTORY_MOVIES + "/test2.mp4");
 

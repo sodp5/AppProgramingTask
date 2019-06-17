@@ -136,12 +136,10 @@ public class MainActivity extends AppCompatActivity {
 
             if(isUp && gravity - accel > 3)
                 isDown = true;
-            using = true;
 
             if(isDown){
-                using = true;
                 notiAlert = new NotiAlert(getApplicationContext()) ;
-                notiAlert.createNotificationChannel("NOTIFICATION_CHANNEL_ID", "충격감지", "캡쳐완료");
+                notiAlert.createNotificationChannel("충격감지", "캡쳐완료");
                 cpvBlackBox.captureCamera(MainActivity.this);
                 using =false;
                 isUp=false;

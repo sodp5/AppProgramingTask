@@ -22,7 +22,7 @@ public class NotiAlert {
         mContext = context;
     }
 
-    public void createNotificationChannel(String channelID, String title, String description){
+    public void createNotificationChannel(String title, String description){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
 

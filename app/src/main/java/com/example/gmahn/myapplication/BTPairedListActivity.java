@@ -29,7 +29,7 @@ public class BTPairedListActivity extends AppCompatActivity {
         pairedDeviceInfoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
 
         findViewById(R.id.btnClosePairedList).setOnClickListener(v -> finish());
-        getBlueToothAdapter();
+        getBluetoothAdapter();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class BTPairedListActivity extends AppCompatActivity {
         }
     }
 
-    private void getBlueToothAdapter() {
+    private void getBluetoothAdapter() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null) {
             Toast.makeText(this, "블루투스를 지원하지 않습니다.", Toast.LENGTH_SHORT).show();
