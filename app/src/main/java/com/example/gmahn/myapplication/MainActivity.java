@@ -1,5 +1,6 @@
 package com.example.gmahn.myapplication;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +11,7 @@ import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private CameraPreviewView cpvBlackBox;
 
     private ImageButton ibVideoCapture;
+    private Button btnCheckPairedBT;
 
     private LocationManager locationManager;
 
@@ -70,10 +73,12 @@ public class MainActivity extends AppCompatActivity {
         linTMapView = findViewById(R.id.linTMapView);
         cpvBlackBox = findViewById(R.id.cpvBlackBox);
         ibVideoCapture = findViewById(R.id.ibVideoCapture);
+        btnCheckPairedBT = findViewById(R.id.btnCheckPairedBT);
     }
 
     private void initEvent() {
         ibVideoCapture.setOnClickListener(ibVideoCaptureClickListener);
+        btnCheckPairedBT.setOnClickListener(btnCheckPairedBTClickListener);
     }
 
     private void initSensor() {
@@ -169,4 +174,6 @@ public class MainActivity extends AppCompatActivity {
             isRecording = true;
         }
     };
+
+    private View.OnClickListener btnCheckPairedBTClickListener = v -> startActivity(new Intent(getApplicationContext(), BTPairedListActivity.class));
 }

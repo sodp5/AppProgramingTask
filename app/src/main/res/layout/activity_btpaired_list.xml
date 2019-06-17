@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BTPairedListActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="페어링된 디바이스 목록"
+        android:textSize="20sp"
+        android:textColor="#1f1f1f"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#000"
+        android:layout_marginTop="1dp"/>
+
+    <ListView
+        android:id="@+id/lvPairedDevice"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/btnClosePairedList"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="닫기"/>
+
+
+</LinearLayout>
