@@ -20,23 +20,10 @@ import android.widget.Toast;
 import com.skt.Tmap.TMapView;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean isRecording;
-
-    private SensorManager sensorManager;
-    private Sensor sensorAccel;
-    private NotiAlert notiAlert;
-
-    boolean using = false;
-
-    boolean isUp=false;
-    boolean isDown=false;
-
-    double accel=0.0;
-    double gravity=9.8;
+    private static final String APP_KEY = "5467b06c-6ee4-4afc-a6f4-f5998493465f";
 
     private TMapView tMapView;
-
-    private static final String APP_KEY = "6e516359-0404-4863-9008-6594a7d4c769";
+    private LocationManager locationManager;
 
     private LinearLayout linTMapView;
     private CameraPreviewView cpvBlackBox;
@@ -44,7 +31,18 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton ibVideoCapture;
     private Button btnCheckPairedBT;
 
-    private LocationManager locationManager;
+    private boolean isRecording;
+
+    private SensorManager sensorManager;
+    private Sensor sensorAccel;
+    private NotiAlert notiAlert;
+
+    boolean using = false;
+    boolean isUp=false;
+    boolean isDown=false;
+
+    double accel=0.0;
+    double gravity=9.8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             float y = sensorEvent.values[1];
             float z = sensorEvent.values[2];
 
-            accel = Math.sqrt( (x*x) + (y*y) + (z*z)); //현재 가속도 상태 값
+            accel = Math.sqrt( (x*x) + (y*y) + (z*z));
 
             if(accel - gravity > 7)
                 isUp = true;
@@ -141,10 +139,6 @@ public class MainActivity extends AppCompatActivity {
             using = true;
 
             if(isDown){
-                if (!using)
-                {
-                    return;
-                }
                 using = true;
                 notiAlert = new NotiAlert(getApplicationContext()) ;
                 notiAlert.createNotificationChannel("NOTIFICATION_CHANNEL_ID", "충격감지", "캡쳐완료");
@@ -175,5 +169,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener btnCheckPairedBTClickListener = v -> startActivity(new Intent(getApplicationContext(), BTPairedListActivity.class));
+    private View.OnClickListener btnCheckPairedBTClickListener = v ->
+            startActivity(new Intent(getApplicationContext(), BTPairedListActivity.class));
 }

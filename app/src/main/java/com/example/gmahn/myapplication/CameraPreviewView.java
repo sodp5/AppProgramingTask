@@ -14,7 +14,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 public class CameraPreviewView extends SurfaceView {
     private static final String TAG = "CameraPreviewView";
@@ -69,10 +68,10 @@ public class CameraPreviewView extends SurfaceView {
                 try {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
                     String outUriStr = MediaStore.Images.Media.insertImage
-                            (activity.getContentResolver(), bitmap, "캡쳐했습니다.", "카메라를 통해 캡쳐했습니다.");
+                            (activity.getContentResolver(), bitmap, "캡쳐", "카메라를 통해 캡쳐함.");
 
                     if (outUriStr == null) {
-                        Log.d(TAG, "이미지 삽입에 실패했습니다.");
+                        Log.d(TAG, "이미지 삽입에 실패");
                         return;
                     }
                     else {
@@ -83,7 +82,7 @@ public class CameraPreviewView extends SurfaceView {
                     camera.startPreview();
                 }
                 catch (Exception e) {
-                    Log.e(TAG, "캡쳐에 실패했습니다.", e);
+                    Log.e(TAG, "캡쳐에 실패", e);
                 }
             });
         }
@@ -109,14 +108,11 @@ public class CameraPreviewView extends SurfaceView {
                         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                         mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
 
-                        // 촬영 각도 90도로
-                        mediaRecorder.setOrientationHint(90);
+//                        mediaRecorder.setOrientationHint(90);
                         mediaRecorder.setOutputFile(Environment.getExternalStorageDirectory().getPath() + "/" +  Environment.DIRECTORY_MOVIES + "/test2.mp4");
                         Log.d("경로", Environment.getExternalStorageDirectory().getPath() + "/" +  Environment.DIRECTORY_MOVIES + "/test2.mp4");
 
-                        // 미리보기 화면 셋팅
                         mediaRecorder.setPreviewDisplay(surfaceHolder.getSurface());
-                        Log.d(TAG, "여기왔다..");
                         mediaRecorder.prepare();
                         mediaRecorder.start();
 

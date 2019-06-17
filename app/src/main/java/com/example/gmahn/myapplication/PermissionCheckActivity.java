@@ -38,7 +38,7 @@ public class PermissionCheckActivity extends AppCompatActivity {
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(this, "not allow permission", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "퍼미션이 허용되지 않았습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
             else {
